@@ -1,64 +1,142 @@
-# GFin — Gestão Financeira Inteligente 🚀
+<div align="center">
 
-**GFin** é uma sistema local de gestão financeira pessoal que combina o poder da **IA (Gemini 2.5 Flash ou Pro)** com uma interface moderna e intuitiva. O objetivo é transformar a maneira como você lida com seu dinheiro, oferecendo desde controle e organização de gastos simples até dicas financeiras baseadas no seu perfil de risco (contém um quiz que indica seu provável perfil).
+# 💰 GFin
 
+**Gestão financeira inteligente com IA generativa**
 
----
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript&logoColor=white)](https://typescriptlang.org)
+[![Gemini](https://img.shields.io/badge/Gemini_2.5_Pro-Google_AI-4285F4?logo=google&logoColor=white)](https://ai.google.dev)
+[![Firebase](https://img.shields.io/badge/Firebase-11-FFCA28?logo=firebase&logoColor=black)](https://firebase.google.com)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 
-## ✨ Funcionalidades Principais
+*Dashboard financeiro com chat IA, extração de dados via PDF/imagem, orçamentos, metas e calculadoras financeiras.*
 
-- **📊 Dashboard Interativo:** Visualize seus gastos por categoria com gráficos dinâmicos, sendo possível agrupar/ filtrar o mês, a categoria 
-- **🤖 Mentor Financeiro IA:** Um chat inteligente integrado ao Google Search, com acesso a dados em tempo real para responder dúvidas sobre o mercado, analisar seus gastos e sugerir estratégias.
-- **📈 Metas Financeiras:** Crie e acompanhe o progresso de seus objetivos financeiros com indicadores visuais.
-- **🧮 Calculadoras Financeiras:** Ferramentas integradas para cálculo de juros compostos e planejamento de longo prazo.
-- **📥 Importação Automática:** Importe seus extratos bancários (CSV/Excel) e deixe a IA classificar as categorias para você.
-- **☁️ Firebase Cloud Sync:** Sincronização em tempo real entre dispositivos e autenticação segura com Google.
-
----
-
-## 🛠️ Tecnologias Utilizadas
-
-- **Frontend:** React 19, TypeScript, Vite e Tailwind CSS.
-- **Estado:** Zustand (com persistência local e Firebase).
-- **Gráficos:** Recharts para visualizações de dados precisas.
-- **IA:** Google Gemini 2.5 Flash API (com Grounding em Google Search).
-- **Backend/Auth:** Firebase Auth e Firestore Database.
-- **Design:** Lucide Icons e animações com Framer Motion.
+</div>
 
 ---
 
-## 🚀 Como Executar
+## ✨ Features
+
+| Feature | Descrição |
+|---|---|
+| 🤖 **Chat com IA** | Mentor financeiro personalizado usando **Gemini 2.5 Pro** com Google Search Grounding para dados em tempo real |
+| 📄 **ETL Inteligente** | Upload de PDFs/imagens de faturas → extração automática de despesas via Gemini com schema JSON estruturado |
+| 📊 **Dashboard** | Visualização de gastos por categoria com gráficos interativos (Recharts) |
+| 💰 **Orçamentos** | Controle de orçamento por categoria com alertas visuais de limite |
+| 🎯 **Metas Financeiras** | Criação de metas com acompanhamento de progresso e cálculo de aporte mensal necessário |
+| 🧮 **Calculadoras** | Juros compostos, independência financeira, reserva de emergência e comparação CDB vs Poupança |
+| 🔐 **Autenticação** | Login com Google via Firebase Auth (opcional) |
+| ☁️ **Cloud Sync** | Dados sincronizados em tempo real via Cloud Firestore (opcional) |
+| 💾 **Persistência Local** | Funciona 100% offline com localStorage — dados salvos sem configuração |
+| 📋 **Responsivo** | Interface adaptada para desktop e mobile |
+
+## 🏗️ Arquitetura
+
+```
+gfin/
+├── components/          # Componentes React
+│   ├── budget/          # Página de orçamentos
+│   ├── calculators/     # Calculadoras financeiras
+│   ├── goals/           # Metas financeiras
+│   ├── ui/              # Componentes base (Button, Card, Modal)
+│   ├── ChatInterface    # Chat com Gemini
+│   ├── Dashboard        # Dashboard principal
+│   └── Sidebar          # Navegação lateral
+├── hooks/               # Custom hooks
+├── services/            # Camada de serviços
+│   ├── gemini.ts        # SDK @google/genai (ETL + Chat)
+│   ├── firebase.ts      # Firebase Auth + Firestore (opcional)
+│   └── storage.ts       # Persistência local com localStorage
+├── stores/              # Estado global (Zustand)
+├── constants/           # Quiz de perfil investidor
+└── types.ts             # TypeScript interfaces
+```
+
+## 🛠️ Tech Stack
+
+| Camada | Tecnologia |
+|---|---|
+| **Frontend** | React 19, TypeScript 5.8 |
+| **State** | Zustand 5 (persist middleware) |
+| **AI/ML** | Gemini 2.5 Pro (`@google/genai`) |
+| **Search** | Google Search Grounding |
+| **Auth** | Firebase Authentication (Google Sign-In) |
+| **Database** | Cloud Firestore (real-time sync) |
+| **Charts** | Recharts 3 |
+| **Animations** | Framer Motion 12 |
+| **Icons** | Lucide React |
+| **Build** | Vite 6 |
+| **Styling** | TailwindCSS (CDN) |
+
+## 🚀 Getting Started
 
 ### Pré-requisitos
-- Node.js (v18 ou superior)
-- Uma chave de API do **Google AI Studio (Gemini)**.
 
-### Instalação
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/lopesgabb/gfin.git
-   ```
-2. Instale as dependências:
-   ```bash
-   npm install
-   ```
-3. Configure as variáveis de ambiente:
-   - Renomeie o arquivo `.env.example` para `.env`.
-   - Adicione sua `GEMINI_API_KEY`.
-4. Inicie o servidor de desenvolvimento:
-   ```bash
-   npm run dev
-   ```
+- Node.js 18+
+- Gemini API Key (para funcionalidades de IA)
 
----
+### 1. Clone o repositório
 
-## 🏛️ Arquitetura do Sistema
+```bash
+git clone https://github.com/lopesgabb/gfin.git
+cd gfin
+```
 
-O GFin utiliza uma arquitetura baseada em **Camadas de Serviço** e **Stores Atômicas**, permitindo que o sistema funcione 100% offline (usando o sistema de Importação Local) ou totalmente integrado à nuvem através do Firebase.
+### 2. Instale as dependências
+
+```bash
+npm install
+```
+
+### 3. Configure as variáveis de ambiente
+
+Copie o arquivo de exemplo e preencha com suas credenciais:
+
+```bash
+cp .env.example .env.local
+```
+
+```env
+# .env.local
+API_KEY=sua_gemini_api_key
+
+# Firebase (Opcional — apenas para sincronização em nuvem)
+VITE_FIREBASE_API_KEY=sua_firebase_api_key
+VITE_FIREBASE_AUTH_DOMAIN=seu-projeto.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=seu-projeto
+VITE_FIREBASE_STORAGE_BUCKET=seu-projeto.firebasestorage.app
+VITE_FIREBASE_MESSAGING_SENDER_ID=123456789
+VITE_FIREBASE_APP_ID=1:123:web:abc
+```
+
+> **Como obter:**
+> - **Gemini API Key**: [Google AI Studio](https://aistudio.google.com/apikey)
+> - **Firebase Config** (opcional): [Firebase Console](https://console.firebase.google.com) → Configurações do Projeto → veja `FIREBASE_SETUP.md`
+
+### 4. Execute
+
+```bash
+npm run dev
+```
+
+O app estará disponível em `http://localhost:5173`
+
+> 💡 **Funciona sem Firebase!** O app usa `localStorage` por padrão. Os dados persistem entre sessões sem nenhuma configuração de banco de dados.
+
+## 🤖 Como a IA funciona
+
+### ETL (Extração de Dados)
+```
+PDF/Imagem → Gemini 2.5 Pro (schema JSON) → Despesas estruturadas
+```
+- Utiliza `responseMimeType: "application/json"` com `responseSchema` tipado
+- Temperature `0.0` para máxima consistência na extração
+- Categoriza automaticamente em 11 categorias financeiras
 
 ### Chat Mentor
 ```
-Mensagem do usuário + Contexto financeiro + Perfil → Gemini 2.5 Flash + Google Grounding → Resposta personalizada
+Mensagem do usuário + Contexto financeiro + Perfil → Gemini 2.5 Pro + Google Grounding → Resposta personalizada
 ```
 - `systemInstruction` com o perfil de risco e dados financeiros do usuário
 - Google Search Grounding para cotações e notícias em tempo real
@@ -68,15 +146,11 @@ Mensagem do usuário + Contexto financeiro + Perfil → Gemini 2.5 Flash + Googl
 
 | Dashboard | Metas Financeiras |
 | :---: | :---: |
-| ![Dashboard](https://github.com/user-attachments/assets/4c652564-d741-4ba1-819a-70d1a4cf1434) | ![Metas](https://github.com/user-attachments/assets/b3a96587-f495-4cff-b8df-c08129c92202) |
+| ![Dashboard](./public/screenshots/1.png) | ![Metas](./public/screenshots/2.png) |
 | **Mentor IA (Chat)** | **Calculadoras** |
-| ![Chat](https://github.com/user-attachments/assets/168e339a-fc9e-4d61-9f6d-1f405f35032b) | ![Calculadoras](https://github.com/user-attachments/assets/43b6a2c3-5ee5-48ec-91da-c96cc569c0f6) |
+| ![Chat](./public/screenshots/3.png) | ![Calculadoras](./public/screenshots/4.png) |
+
 *Nota: As imagens acima mostram dados fictícios para fins de demonstração.*
-
-## Disclaimer:
-Este conteúdo tem caráter exclusivamente educacional e informativo, não constituindo recomendação de investimento, oferta ou solicitação de compra ou venda de ativos financeiros.
-Antes de tomar qualquer decisão de investimento, consulte um profissional devidamente habilitado e considere seu perfil de risco.
-
 
 ## 📄 License
 
@@ -86,5 +160,6 @@ Este projeto está sob a licença MIT. Veja [LICENSE](./LICENSE) para detalhes.
 
 <div align="center">
 
+**Desenvolvido com ❤️ usando React, Gemini AI e Firebase**
 
 </div>

@@ -7,11 +7,11 @@ const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const GeminiService = {
   /**
-   * ETL Function: Extracts data from PDF/Image using Gemini 2.5 Pro
+   * ETL Function: Extracts data from PDF/Image using Gemini 2.5 Flash
    */
   processInvoice: async (fileBase64: string, mimeType: string, filename: string) => {
     const prompt = `
-      Atue como um extrator de dados preciso. Analise o arquivo fornecido (${filename}).
+      Atue como um extrator de dados preciso. Analise o arquivo fornecido (\${filename}).
       
       TAREFA:
       1. Identifique transações financeiras.
@@ -20,7 +20,7 @@ export const GeminiService = {
          - merchant (Nome do estabelecimento)
          - value (Valor numérico, float positivo)
          - category (Uma das categorias permitidas)
-      3. Categorias permitidas: ${JSON.stringify(VALID_CATEGORIES)}.
+      3. Categorias permitidas: \${JSON.stringify(VALID_CATEGORIES)}.
       4. Se a categoria não estiver clara, use "Outros".
       5. Retorne APENAS um JSON válido seguindo o schema.
     `;
@@ -93,11 +93,11 @@ export const GeminiService = {
       Você é o GFin, um Consultor Financeiro de Elite.
       
       PERFIL DO USUÁRIO:
-      - Renda: R$ ${profile.salary}
-      - Perfil: ${profile.risk}
+      - Renda: R$ \${profile.salary}
+      - Perfil: \${profile.risk}
       
       DADOS FINANCEIROS ATUAIS (VISÃO DO DASHBOARD):
-      ${financialContext}
+      \${financialContext}
       
       FERRAMENTAS:
       - Use 'Google Search' para buscar cotações (Dólar, Selic, Ações) e notícias atuais.

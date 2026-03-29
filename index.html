@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GFin — Gestão Financeira Inteligente</title>
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Space Grotesk', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            'brutal': '4px 4px 0px 0px rgb(15, 23, 42)',
+            'brutal-sm': '2px 2px 0px 0px rgb(15, 23, 42)',
+            'brutal-emerald': '4px 4px 0px 0px rgb(5, 150, 105)',
+            'brutal-amber': '4px 4px 0px 0px rgb(217, 119, 6)',
+          }
+        }
+      }
+    }
+  </script>
+  <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://esm.sh/@google/genai@^1.35.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.1.1?external=react",
+    "zustand": "https://esm.sh/zustand@^5.0.2?external=react",
+    "zustand/": "https://esm.sh/zustand@^5.0.2/",
+    "recharts": "https://esm.sh/recharts@^3.6.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "firebase/app": "https://esm.sh/firebase@^11.2.0/app",
+    "firebase/auth": "https://esm.sh/firebase@^11.2.0/auth",
+    "firebase/firestore": "https://esm.sh/firebase@^11.2.0/firestore",
+    "framer-motion": "https://esm.sh/framer-motion@^11.0.0?external=react"
+  }
+}
+</script>
+  <link rel="stylesheet" href="/index.css">
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
+</html>

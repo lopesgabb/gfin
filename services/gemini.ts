@@ -7,7 +7,7 @@ const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const GeminiService = {
   /**
-   * ETL Function: Extracts data from PDF/Image using Gemini 2.5 Flash
+   * ETL Function: Extracts data from PDF/Image using Gemini 2.5 Pro
    */
   processInvoice: async (fileBase64: string, mimeType: string, filename: string) => {
     const prompt = `

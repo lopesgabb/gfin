@@ -27,7 +27,7 @@ export const GeminiService = {
 
     try {
       const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-2.5-pro",
         contents: [
           {
             parts: [
@@ -86,7 +86,7 @@ export const GeminiService = {
   },
 
   /**
-   * Chat Function: Consults Gemini 3.0 Flash with Grounding
+   * Chat Function: Consults Gemini 2.5 Pro with Grounding
    */
   chatWithMentor: async (message: string, history: ChatMessage[], profile: UserProfile, financialContext: string) => {
     const systemInstruction = `
@@ -123,7 +123,7 @@ export const GeminiService = {
 
     try {
       const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-2.5-pro",
         contents: contents,
         config: {
           systemInstruction: systemInstruction,

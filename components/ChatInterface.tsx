@@ -60,14 +60,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ profile, expenses, select
 
     const financialContext = `
       RESUMO DOS DADOS ATUAIS NO DASHBOARD:
-      - Filtro Selecionado pelo Usuário: ${selectedFilter}
-      - Valor Total Gasto (neste filtro): R$ ${total.toFixed(2)}
-      - Quantidade de Transações: ${count}
+      - Filtro Selecionado pelo Usuário: \${selectedFilter}
+      - Valor Total Gasto (neste filtro): R$ \${total.toFixed(2)}
+      - Quantidade de Transações: \${count}
       - Top 5 Transações (Valor):
-        ${relevantExpenses
+        \${relevantExpenses
         .sort((a, b) => b.value - a.value)
         .slice(0, 5)
-        .map(e => `- ${e.date}: ${e.merchant} (R$ ${e.value.toFixed(2)}) - ${e.category}`)
+        .map(e => `- \${e.date}: \${e.merchant} (R$ \${e.value.toFixed(2)}) - \${e.category}`)
         .join('\n')}
     `;
 
@@ -105,21 +105,23 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ profile, expenses, select
             </h2>
             <p className="text-xs text-slate-500 mt-1 flex items-center gap-1">
               <Sparkles className="w-3 h-3" />
-              Gemini 2.5 Flash com Google Search • Perfil: {profileInfo.emoji} {profile.risk}
+              Gemini 2.5 Pro com Google Search • Perfil: {profileInfo.emoji} {profile.risk}
             </p>
           </div>
 
           {history.length > 0 && (
-            <button
+            <Button
+              variant="ghost"
+              size="sm"
+              icon={<Trash2 className="w-4 h-4" />}
               onClick={() => {
                 if (window.confirm('Limpar histórico de conversas?')) {
                   clearHistory();
                 }
               }}
-              className="p-2 hover:bg-slate-100 rounded-lg text-slate-400 hover:text-red-500 transition-colors"
             >
-              <Trash2 className="w-5 h-5" />
-            </button>
+              Limpar
+            </Button>
           )}
         </div>
       </div>
@@ -166,7 +168,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ profile, expenses, select
         )}
 
         {history.map((msg, idx) => (
-          <div key={idx} className={`flex gap-4 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+          <div key={idx} className={`flex gap-4 \${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
             {msg.role === 'model' && (
               <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0 border border-emerald-200">
                 <Bot className="w-5 h-5 text-emerald-600" />
@@ -175,7 +177,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ profile, expenses, select
 
             <div className={`
                 max-w-[80%] rounded-2xl px-5 py-3.5 text-sm leading-relaxed shadow-sm
-                ${msg.role === 'user'
+                \${msg.role === 'user'
                 ? 'bg-slate-800 text-white rounded-tr-sm'
                 : 'bg-white text-slate-700 border border-slate-200 rounded-tl-sm'}
             `}>
@@ -212,6 +214,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ profile, expenses, select
         )}
       </div>
 
+
+
       {/* Input Area */}
       <div className="p-4 bg-white border-t border-slate-200">
         <form onSubmit={handleSubmit} className="relative max-w-4xl mx-auto">
@@ -226,7 +230,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ profile, expenses, select
           <button
             type="submit"
             disabled={!input.trim() || isLoading}
-            className="absolute right-2 top-2 p-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 disabled:opacity-50 transition-colors"
+            className="absolute right-2 top-2 p-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 disabled:opacity-50 disabled:hover:bg-emerald-600 transition-colors"
           >
             <Send className="w-5 h-5" />
           </button>

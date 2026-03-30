@@ -98,13 +98,20 @@ const Dashboard: React.FC<DashboardProps> = ({ expenses, selectedCategory, onCat
             .sort((a, b) => b.value - a.value);
     }, [monthFilteredExpenses]);
 
-    // Monthly evolution chart (uses all expenses to show trend)
+    // Monthly evolution chart (uses category filter to show trend)
     const monthlyData = useMemo(() => {
         const agg: Record<string, number> = {};
-        expenses.forEach(e => {
+        
+        let filteredForChart = expenses;
+        if (selectedCategory !== "Todas") {
+            filteredForChart = filteredForChart.filter(e => (e.category || "Outros") === selectedCategory);
+        }
+
+        filteredForChart.forEach(e => {
             const month = e.date.substring(0, 7); // YYYY-MM
             agg[month] = (agg[month] || 0) + e.value;
         });
+        
         return Object.entries(agg)
             .map(([month, value]) => ({
                 name: new Date(month + '-01').toLocaleDateString('pt-BR', { month: 'short', year: '2-digit' }),
@@ -112,7 +119,7 @@ const Dashboard: React.FC<DashboardProps> = ({ expenses, selectedCategory, onCat
                 value
             }))
             .sort((a, b) => a.monthKey.localeCompare(b.monthKey));
-    }, [expenses]);
+    }, [expenses, selectedCategory]);
 
     // Filter Logic for table (applies both month and category)
     const availableCategories = useMemo(() => {

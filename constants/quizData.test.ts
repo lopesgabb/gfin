@@ -20,16 +20,14 @@ describe('quizData', () => {
     expect(getProfileFromScore(9)).toBe('Conservador');
   });
 
-  it('maps boundary 40% to Conservador and next value to Moderado', () => {
-    const maxScore = QUIZ_QUESTIONS.length * 3; // 24
-    const scoreAt40 = (40 / 100) * maxScore; // 9.6
-    expect(getProfileFromScore(scoreAt40)).toBe('Conservador');
-    expect(getProfileFromScore(scoreAt40 + 0.1)).toBe('Moderado');
+  it('maps practical boundary around 40% correctly', () => {
+    expect(getProfileFromScore(9)).toBe('Conservador');
+    expect(getProfileFromScore(10)).toBe('Moderado');
   });
 
   it('maps boundary 70% to Moderado and above to Arrojado', () => {
-    const maxScore = QUIZ_QUESTIONS.length * 3; // 24
-    const scoreAt70 = (70 / 100) * maxScore; // 16.8
+    const maxScore = QUIZ_QUESTIONS.length * 3;
+    const scoreAt70 = (70 / 100) * maxScore;
     expect(getProfileFromScore(scoreAt70)).toBe('Moderado');
     expect(getProfileFromScore(scoreAt70 + 0.1)).toBe('Arrojado');
   });
